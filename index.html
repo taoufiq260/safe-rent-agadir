@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Rent Agadir - Location de Voitures à Agadir</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Tajawal', sans-serif; }
+        .bg-hero {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.75)), url('./img/Agadir image, for Website background.png');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Custom Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-red-600 to-rose-700 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-inner flex justify-center items-center gap-2">
+        <span><i class="fa-solid fa-star text-amber-300"></i> Service Client 5 Étoiles sur Google sur Agadir & Aéroport</span>
+        <span class="hidden md:inline">•</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-bolt text-amber-300"></i> Confirmation Rapide & Annulation Gratuite</span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 group">
+                <div class="bg-red-50 p-2 rounded-xl group-hover:bg-red-100 transition">
+                    <i class="fa-solid fa-car-side text-red-600 text-2xl"></i>
+                </div>
+                <span class="text-xl font-black tracking-tight text-slate-900">Safe Rent <span class="text-red-600">Agadir</span></span>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-8 font-semibold text-slate-600 text-sm">
+                <a href="#" id="navHome" class="hover:text-red-600 transition">Accueil</a>
+                <a href="#vehicles" id="navVehicles" class="hover:text-red-600 transition">Nos Véhicules</a>
+                <a href="#reviews" id="navReviews" class="hover:text-red-600 transition">Avis Clients</a>
+                <a href="#about" id="navAbout" class="hover:text-red-600 transition">À Propos</a>
+                <a href="#contact" id="navContact" class="hover:text-red-600 transition">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <a href="https://wa.me/212648926155" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3.5 py-1.5 rounded-full text-sm font-bold hover:bg-emerald-100 transition">
+                    <i class="fa-brands fa-whatsapp text-lg text-emerald-600"></i> +212 648926155
+                </a>
+                <!-- Language Switcher Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-1.5 rounded-xl text-xs md:text-sm font-bold transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-globe text-red-500"></i> <span id="langBtnText">العربية</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-hero py-20 lg:py-28 px-4 text-center text-white relative">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold text-red-300 border border-white/20">
+                <i class="fa-solid fa-shield-halved text-emerald-400"></i> <span id="heroBadge">Location Sécurisée & Sans Surprise</span>
+            </div>
+            <h1 id="heroTitle" class="text-3xl md:text-6xl font-black tracking-tight leading-tight">Louez votre voiture idéale à Agadir</h1>
+            <p id="heroSub" class="text-base md:text-xl text-slate-200 max-w-2xl mx-auto font-normal">
+                Livraison rapide à l'aéroport Al Massira ou directement à votre hôtel. Véhicules récents, boîtes automatiques et service 5 étoiles.
+            </p>
+            <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#booking" id="heroCta" class="bg-red-600 hover:bg-red-700 text-white font-extrabold py-3.5 px-8 rounded-xl shadow-lg hover:shadow-red-600/30 transition transform hover:-translate-y-0.5">Réserver Maintenant</a>
+                <a href="#vehicles" id="heroCtaSec" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold py-3.5 px-8 rounded-xl transition backdrop-blur-sm">Voir la Flotte</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Highlights -->
+    <section class="bg-white border-b border-slate-200/80 py-8">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-3">
+                <i class="fa-solid fa-plane-arrival text-2xl text-red-600 mb-2"></i>
+                <h4 id="feat1Title" class="font-bold text-sm text-slate-900">Livraison Aéroport</h4>
+                <p id="feat1Desc" class="text-xs text-slate-500">Accueil direct à l'arrivée</p>
+            </div>
+            <div class="p-3">
+                <i class="fa-solid fa-gears text-2xl text-red-600 mb-2"></i>
+                <h4 id="feat2Title" class="font-bold text-sm text-slate-900">100% Automatique</h4>
+                <p id="feat2Desc" class="text-xs text-slate-500">Confort de conduite garanti</p>
+            </div>
+            <div class="p-3">
+                <i class="fa-solid fa-headset text-2xl text-red-600 mb-2"></i>
+                <h4 id="feat3Title" class="font-bold text-sm text-slate-900">Support 24/7</h4>
+                <p id="feat3Desc" class="text-xs text-slate-500">Assistance dédiée via WhatsApp</p>
+            </div>
+            <div class="p-3">
+                <i class="fa-solid fa-hand-holding-dollar text-2xl text-red-600 mb-2"></i>
+                <h4 id="feat4Title" class="font-bold text-sm text-slate-900">Transparence Totale</h4>
+                <p id="feat4Desc" class="text-xs text-slate-500">Pas de frais cachés</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicles Showcase -->
+    <section id="vehicles" class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 id="carsTitle" class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Nos Véhicules Disponibles</h2>
+            <p id="carsSub" class="text-slate-500 mt-2 text-sm md:text-base">Choisissez parmi notre flotte moderne de voitures automatiques parfaitement entretenues.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 1. Hyundai i10 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                <div class="relative bg-slate-100 h-52 overflow-hidden flex items-center justify-center">
+                    <img src="./img/Hyundai i10 Car image.png" alt="Hyundai i10" class="object-cover h-full w-full hover:scale-105 transition duration-500">
+                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Populaire</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Hyundai i10</h3>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 my-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span><i class="fa-solid fa-gears text-red-600 mr-1"></i> Automatique</span>
+                        <span><i class="fa-solid fa-user-group text-red-600 mr-1"></i> 5 Places</span>
+                        <span><i class="fa-solid fa-door-closed text-red-600 mr-1"></i> 5 Portes</span>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block fromText">à partir de</span>
+                            <span class="text-2xl font-black text-red-600">250 <span class="text-xs font-bold text-slate-700">DHS / <span class="dayText">jour</span></span></span>
+                        </div>
+                        <button onclick="selectCar('Hyundai i10')" class="bg-slate-900 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl transition text-sm bookBtnText">Réserver</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Renault Clio 5 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                <div class="relative bg-slate-100 h-52 overflow-hidden flex items-center justify-center">
+                    <img src="./img/Renault Clio 5 Automatic, car image.webp" alt="Renault Clio 5 Automatic" class="object-cover h-full w-full hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Renault Clio 5</h3>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 my-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span><i class="fa-solid fa-gears text-red-600 mr-1"></i> Automatique</span>
+                        <span><i class="fa-solid fa-user-group text-red-600 mr-1"></i> 5 Places</span>
+                        <span><i class="fa-solid fa-door-closed text-red-600 mr-1"></i> 5 Portes</span>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block fromText">à partir de</span>
+                            <span class="text-2xl font-black text-red-600">330 <span class="text-xs font-bold text-slate-700">DHS / <span class="dayText">jour</span></span></span>
+                        </div>
+                        <button onclick="selectCar('Renault Clio 5 Automatic')" class="bg-slate-900 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl transition text-sm bookBtnText">Réserver</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Dacia Sandero -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                <div class="relative bg-slate-100 h-52 overflow-hidden flex items-center justify-center">
+                    <img src="./img/Dacia Sandero, car image.webp" alt="Dacia Sandero" class="object-cover h-full w-full hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Dacia Sandero</h3>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 my-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span><i class="fa-solid fa-gears text-red-600 mr-1"></i> Automatique</span>
+                        <span><i class="fa-solid fa-user-group text-red-600 mr-1"></i> 5 Places</span>
+                        <span><i class="fa-solid fa-door-closed text-red-600 mr-1"></i> 5 Portes</span>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block fromText">à partir de</span>
+                            <span class="text-2xl font-black text-red-600">350 <span class="text-xs font-bold text-slate-700">DHS / <span class="dayText">jour</span></span></span>
+                        </div>
+                        <button onclick="selectCar('Dacia Sandero')" class="bg-slate-900 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl transition text-sm bookBtnText">Réserver</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Dacia Duster -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                <div class="relative bg-slate-100 h-52 overflow-hidden flex items-center justify-center">
+                    <img src="./img/Dacia Duster Car Image.png" alt="Dacia Duster" class="object-cover h-full w-full hover:scale-105 transition duration-500">
+                    <span class="absolute top-3 right-3 bg-slate-900 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">SUV Confort</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Dacia Duster</h3>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 my-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span><i class="fa-solid fa-gears text-red-600 mr-1"></i> Automatique</span>
+                        <span><i class="fa-solid fa-user-group text-red-600 mr-1"></i> 5 Places</span>
+                        <span><i class="fa-solid fa-door-closed text-red-600 mr-1"></i> 5 Portes</span>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block fromText">à partir de</span>
+                            <span class="text-2xl font-black text-red-600">400 <span class="text-xs font-bold text-slate-700">DHS / <span class="dayText">jour</span></span></span>
+                        </div>
+                        <button onclick="selectCar('Dacia Duster')" class="bg-slate-900 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl transition text-sm bookBtnText">Réserver</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Dacia Logan -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                <div class="relative bg-slate-100 h-52 overflow-hidden flex items-center justify-center">
+                    <img src="./img/Dacia Logan, car image.webp" alt="Dacia Logan" class="object-cover h-full w-full hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Dacia Logan</h3>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 my-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span><i class="fa-solid fa-gears text-red-600 mr-1"></i> Automatique</span>
+                        <span><i class="fa-solid fa-user-group text-red-600 mr-1"></i> 5 Places</span>
+                        <span><i class="fa-solid fa-door-closed text-red-600 mr-1"></i> 5 Portes</span>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block fromText">à partir de</span>
+                            <span class="text-2xl font-black text-red-600">440 <span class="text-xs font-bold text-slate-700">DHS / <span class="dayText">jour</span></span></span>
+                        </div>
+                        <button onclick="selectCar('Dacia Logan')" class="bg-slate-900 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl transition text-sm bookBtnText">Réserver</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Kia Sportage -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                <div class="relative bg-slate-100 h-52 overflow-hidden flex items-center justify-center">
+                    <img src="./img/Kia Sportage Car image.png" alt="Kia Sportage" class="object-cover h-full w-full hover:scale-105 transition duration-500">
+                    <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Premium SUV</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Kia Sportage</h3>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-500 my-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span><i class="fa-solid fa-gears text-red-600 mr-1"></i> Automatique</span>
+                        <span><i class="fa-solid fa-user-group text-red-600 mr-1"></i> 5 Places</span>
+                        <span><i class="fa-solid fa-door-closed text-red-600 mr-1"></i> 5 Portes</span>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block fromText">à partir de</span>
+                            <span class="text-2xl font-black text-red-600">600 <span class="text-xs font-bold text-slate-700">DHS / <span class="dayText">jour</span></span></span>
+                        </div>
+                        <button onclick="selectCar('Kia Sportage')" class="bg-slate-900 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl transition text-sm bookBtnText">Réserver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google 5-Star Reviews Section -->
+    <section id="reviews" class="bg-slate-900 text-white py-16 px-4 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full text-amber-400 text-xs font-bold mb-3">
+                        <i class="fa-brands fa-google"></i> AVIS GOOGLE VERIFIÉS
+                    </div>
+                    <h2 id="reviewsTitle" class="text-3xl md:text-4xl font-extrabold tracking-tight">Ce que nos clients disent de nous</h2>
+                </div>
+                <!-- Google Overall Badge -->
+                <a href="https://maps.app.goo.gl/iJ7ykHZQFMyJend6A" target="_blank" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 p-4 rounded-2xl flex items-center gap-4 transition group">
+                    <div class="text-3xl text-amber-400 font-black">5.0</div>
+                    <div>
+                        <div class="flex text-amber-400 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-slate-300 mt-0.5 group-hover:text-white transition">Basé sur les avis Google Maps</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-red-400 text-sm ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Reviews Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p id="rev1Text" class="text-slate-300 text-sm italic">"Très bon service! La voiture (Clio 5) était livrée à l'aéroport d'Agadir à l'heure, propre et en parfait état. Réservez les yeux fermés."</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-red-600 text-white font-bold flex items-center justify-center text-sm">Y</div>
+                        <div>
+                            <h5 class="font-bold text-sm">Youssef B.</h5>
+                            <span class="text-xs text-slate-400">Avis Google</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p id="rev2Text" class="text-slate-300 text-sm italic">"Excellent accueil et transparence totale sur les prix. Nous avons loué le Dacia Duster pour une semaine, véhicule très confortable pour explorer la région."</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-sm">M</div>
+                        <div>
+                            <h5 class="font-bold text-sm">Marc D.</h5>
+                            <span class="text-xs text-slate-400">Avis Google</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p id="rev3Text" class="text-slate-300 text-sm italic">"Service WhatsApp super réactif! Communication facile, démarche rapide sans prise de tête. Je recommande fortement Safe Rent."</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-sm">S</div>
+                        <div>
+                            <h5 class="font-bold text-sm">Sara M.</h5>
+                            <span class="text-xs text-slate-400">Avis Google</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="booking" class="bg-slate-100 py-16 border-t border-slate-200">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-200">
+                <div class="text-center mb-8">
+                    <span class="bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Réservation En Ligne</span>
+                    <h2 id="formTitle" class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">Demande de Réservation</h2>
+                    <p id="formSub" class="text-slate-500 text-xs md:text-sm mt-1">Vérifiez la disponibilité de votre véhicule en quelques clics.</p>
+                </div>
+                
+                <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+                    <div>
+                        <label id="labelCar" class="block text-xs font-bold text-slate-700 uppercase mb-1">Véhicule choisi *</label>
+                        <select id="chosenCar" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-50">
+                            <option value="">-- Sélectionnez une voiture --</option>
+                            <option value="Hyundai i10">Hyundai i10 (Dès 250 DHS/j)</option>
+                            <option value="Renault Clio 5 Automatic">Renault Clio 5 (Dès 330 DHS/j)</option>
+                            <option value="Dacia Sandero">Dacia Sandero (Dès 350 DHS/j)</option>
+                            <option value="Dacia Duster">Dacia Duster (Dès 400 DHS/j)</option>
+                            <option value="Dacia Logan">Dacia Logan (Dès 440 DHS/j)</option>
+                            <option value="Kia Sportage">Kia Sportage (Dès 600 DHS/j)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label id="labelName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nom complet *</label>
+                        <input type="text" id="fullName" required placeholder="Ex: Mohamed Alami" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label id="labelEmail" class="block text-xs font-bold text-slate-700 uppercase mb-1">Adresse e-mail *</label>
+                            <input type="email" id="emailAddress" required placeholder="exemple@email.com" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+
+                        <div>
+                            <label id="labelPhone" class="block text-xs font-bold text-slate-700 uppercase mb-1">Numéro de téléphone *</label>
+                            <input type="tel" id="phoneNumber" required placeholder="+212 600000000" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+                    </div>
+
+                    <!-- Pickup Date & Time -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label id="labelPickupDate" class="block text-xs font-bold text-slate-700 uppercase mb-1">Date de prise en charge *</label>
+                            <input type="date" id="pickupDate" required onchange="calculateRentalDays()" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+
+                        <div>
+                            <label id="labelPickupTime" class="block text-xs font-bold text-slate-700 uppercase mb-1">Heure de prise en charge *</label>
+                            <select id="pickupTime" required onchange="syncReturnTime()" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 bg-white">
+                                <option value="">-- Choisir l'heure --</option>
+                                <option value="08:00">08:00</option>
+                                <option value="08:30">08:30</option>
+                                <option value="09:00">09:00</option>
+                                <option value="09:30">09:30</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                                <option value="16:30">16:30</option>
+                                <option value="17:00">17:00</option>
+                                <option value="17:30">17:30</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Return Date & Time -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label id="labelReturnDate" class="block text-xs font-bold text-slate-700 uppercase mb-1">Date de retour *</label>
+                            <input type="date" id="returnDate" required onchange="calculateRentalDays()" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+
+                        <div>
+                            <label id="labelReturnTime" class="block text-xs font-bold text-slate-700 uppercase mb-1">Heure de retour *</label>
+                            <input type="text" id="returnTime" readonly class="w-full border border-slate-200 bg-slate-100 text-slate-500 text-sm rounded-xl p-3 cursor-not-allowed" placeholder="Identique à la prise en charge">
+                        </div>
+                    </div>
+
+                    <!-- Auto-Calculated Duration Display -->
+                    <div id="durationBadge" class="hidden p-3.5 bg-red-50 border border-red-200 text-red-800 rounded-xl font-bold text-sm text-center">
+                        <i class="fa-solid fa-clock mr-1 text-red-600"></i> <span id="durationLabel">Durée totale:</span> <span id="calculatedDays">0</span> <span class="dayText">jour(s)</span>
+                    </div>
+
+                    <div>
+                        <label id="labelNotes" class="block text-xs font-bold text-slate-700 uppercase mb-1">Notes supplémentaires (Optionnel)</label>
+                        <textarea id="additionalNotes" rows="3" placeholder="Numéro de vol, lieu de livraison souhaité..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-red-600 hover:bg-red-700 disabled:opacity-75 disabled:cursor-not-allowed text-white font-extrabold py-4 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-base">
+                        <span id="submitBtnText">Vérifier la Disponibilité</span>
+                    </button>
+                </form>
+
+                <!-- Response Banner -->
+                <div id="responseAlert" class="hidden mt-6 p-4 rounded-xl text-sm font-semibold"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-16 px-4 bg-white">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-4">
+                <span class="bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Qui Sommes-Nous</span>
+                <h2 id="aboutTitle" class="text-3xl font-extrabold text-slate-900">Votre partenaire automobile de confiance à Agadir</h2>
+                <p id="aboutP1" class="text-slate-600 leading-relaxed text-sm md:text-base">
+                    Bienvenue chez <strong>Safe Rent Agadir</strong>. Nous sommes spécialisés dans la location de véhicules récents, automatiques et parfaitement entretenus à Agadir et ses environs.
+                </p>
+                <p id="aboutP2" class="text-slate-600 leading-relaxed text-sm md:text-base">
+                    Que vous veniez pour les vacances ou le travail, notre priorité est de vous offrir une expérience fluide, transparente et sans tracas dès votre arrivée à l'aéroport ou en centre-ville.
+                </p>
+                <div class="pt-2 grid grid-cols-2 gap-4 text-slate-800 font-bold text-sm">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span id="abFeat1">Aéroport & Ville</span></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span id="abFeat2">Assurance Incluse</span></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span id="abFeat3">Prix Compétitifs</span></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span id="abFeat4">Kilométrage Adapté</span></div>
+                </div>
+            </div>
+            <div class="relative">
+                <img src="./img/Agadir image, for Website background.png" alt="Safe Rent Agadir" class="rounded-3xl shadow-xl object-cover h-80 w-full">
+                <div class="absolute -bottom-6 -left-6 bg-slate-900 text-white p-6 rounded-2xl shadow-xl hidden sm:block border border-slate-800">
+                    <div class="text-3xl font-black text-red-500">100%</div>
+                    <div class="text-xs text-slate-300 font-medium">Satisfaction Client</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 id="contactSectionTitle" class="text-3xl font-extrabold text-slate-900">Contactez-Nous</h2>
+                <p id="contactSectionSub" class="text-slate-500 text-sm mt-1">Notre équipe est disponible 7j/7 pour répondre à toutes vos questions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">Téléphone & WhatsApp</h4>
+                    <p class="text-slate-500 text-sm mb-3">+212 648926155</p>
+                    <a href="https://wa.me/212648926155" target="_blank" class="text-xs font-bold text-emerald-600 hover:underline">Discuter sur WhatsApp →</a>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">E-mail</h4>
+                    <p class="text-slate-500 text-sm mb-3">saferentaga@gmail.com</p>
+                    <a href="mailto:saferentaga@gmail.com" class="text-xs font-bold text-red-600 hover:underline">Envoyer un e-mail →</a>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-1">Adresse</h4>
+                    <p class="text-slate-500 text-sm mb-3">Douar Ikhourban Temsia, Agadir</p>
+                    <a href="https://maps.app.goo.gl/iJ7ykHZQFMyJend6A" target="_blank" class="text-xs font-bold text-slate-900 hover:underline">Ouvrir Google Maps →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white mt-auto py-12 px-4 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-3">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-car-side text-red-500 text-2xl"></i>
+                    <span class="text-xl font-bold tracking-wide">Safe Rent Agadir</span>
+                </div>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                    Votre agence de location de voitures de confiance à Agadir. Service rapide, véhicules récents et prix transparents.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-bold uppercase text-slate-200 mb-3 tracking-wider">Navigation</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white transition">Accueil</a></li>
+                    <li><a href="#vehicles" class="hover:text-white transition">Nos Véhicules</a></li>
+                    <li><a href="#reviews" class="hover:text-white transition">Avis Google</a></li>
+                    <li><a href="#about" class="hover:text-white transition">À Propos</a></li>
+                    <li><a href="#contact" class="hover:text-white transition">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 id="footerContact" class="text-sm font-bold uppercase text-slate-200 mb-3 tracking-wider">Contact</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><i class="fa-solid fa-envelope mr-2 text-red-500"></i> saferentaga@gmail.com</li>
+                    <li><i class="fa-brands fa-whatsapp mr-2 text-emerald-500"></i> +212 648926155</li>
+                    <li><i class="fa-solid fa-location-dot mr-2 text-red-500"></i> Douar Ikhourban Temsia, Agadir</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 id="footerLegal" class="text-sm font-bold uppercase text-slate-200 mb-3 tracking-wider">Informations Légales</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><button onclick="openLegalModal('mentions')" class="hover:text-white transition underline text-left">Mentions Légales</button></li>
+                    <li><button onclick="openLegalModal('cgv')" class="hover:text-white transition underline text-left">Conditions Générales (CGV)</button></li>
+                    <li><button onclick="openLegalModal('privacy')" class="hover:text-white transition underline text-left">Politique de Confidentialité</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>© 2026 Safe Rent Agadir. Tous droits réservés.</p>
+            <a href="https://maps.app.goo.gl/iJ7ykHZQFMyJend6A" target="_blank" class="text-red-400 hover:text-red-300 font-semibold inline-flex items-center gap-1">
+                <i class="fa-solid fa-map-location-dot"></i> Agadir, Maroc
+            </a>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div class="fixed bottom-5 right-5 z-50">
+        <!-- Chat Toggle Button -->
+        <button onclick="toggleChat()" class="bg-red-600 text-white p-4 rounded-full shadow-2xl hover:bg-red-700 transition flex items-center justify-center w-14 h-14 ring-4 ring-white/20">
+            <i class="fa-solid fa-comments text-2xl"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chatWindow" class="hidden fixed bottom-22 right-5 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-96 z-50">
+            <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+                <span class="font-bold flex items-center text-sm"><i class="fa-solid fa-headset mr-2 text-red-500"></i> Safe Rent Assistant</span>
+                <button onclick="toggleChat()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="chatMessages" class="p-4 flex-1 overflow-y-auto text-sm space-y-3 bg-slate-50">
+                <div class="bg-slate-200 text-slate-800 p-2.5 rounded-xl max-w-[80%]">
+                    Bonjour! Comment puis-je vous aider aujourd'hui?
+                </div>
+            </div>
+            <div class="p-2 border-t border-slate-200 bg-white flex">
+                <input type="text" id="chatInput" placeholder="Posez votre question..." class="flex-1 border border-slate-300 rounded-l-xl p-2 text-sm focus:outline-none">
+                <button onclick="sendChatMessage()" class="bg-red-600 text-white px-4 rounded-r-xl hover:bg-red-700"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Pages Modal -->
+    <div id="legalModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] flex flex-col overflow-hidden shadow-2xl">
+            <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
+                <h3 id="legalModalTitle" class="font-bold text-lg">Information Légale</h3>
+                <button onclick="closeLegalModal()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="legalModalContent" class="p-6 overflow-y-auto text-xs md:text-sm text-slate-600 space-y-4">
+                <!-- Content dynamically injected -->
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 text-right">
+                <button onclick="closeLegalModal()" class="bg-slate-900 text-white font-bold px-4 py-2 rounded-xl text-xs">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // CONFIGURATION: WEBHOOK URL PLACEHOLDERS
+        const BOOKING_WEBHOOK_URL = "https://taoufiq-14-08.app.n8n.cloud/webhook/book-car-123";
+        const CHATBOT_WEBHOOK_URL = "https://taoufiq-14-08.app.n8n.cloud/webhook-test/chatbot-123";
+
+        function getUserId() {
+            return 'usr_' + Math.random().toString(36).substring(2, 9) + Date.now().toString(36);
+        }
+
+        const USER_ID = getUserId();
+        let currentLang = 'fr';
+        let totalCalculatedDays = 0;
+
+        const translations = {
+            fr: {
+                langBtn: "العربية",
+                dir: "ltr",
+                heroBadge: "Location Sécurisée & Sans Surprise",
+                heroTitle: "Louez votre voiture idéale à Agadir",
+                heroSub: "Livraison rapide à l'aéroport Al Massira ou directement à votre hôtel. Véhicules récents, boîtes automatiques et service 5 étoiles.",
+                heroCta: "Réserver Maintenant",
+                heroCtaSec: "Voir la Flotte",
+                feat1Title: "Livraison Aéroport", feat1Desc: "Accueil direct à l'arrivée",
+                feat2Title: "100% Automatique", feat2Desc: "Confort de conduite garanti",
+                feat3Title: "Support 24/7", feat3Desc: "Assistance dédiée via WhatsApp",
+                feat4Title: "Transparence Totale", feat4Desc: "Pas de frais cachés",
+                carsTitle: "Nos Véhicules Disponibles",
+                carsSub: "Choisissez parmi notre flotte moderne de voitures automatiques parfaitement entretenues.",
+                fromText: "à partir de",
+                dayText: "jour",
+                bookBtn: "Réserver",
+                reviewsTitle: "Ce que nos clients disent de nous",
+                formTitle: "Demande de Réservation",
+                formSub: "Vérifiez la disponibilité de votre véhicule en quelques clics.",
+                labelCar: "Véhicule choisi *",
+                labelName: "Nom complet *",
+                labelEmail: "Adresse e-mail *",
+                labelPhone: "Numéro de téléphone *",
+                labelPickupDate: "Date de prise en charge *",
+                labelPickupTime: "Heure de prise en charge *",
+                labelReturnDate: "Date de retour *",
+                labelReturnTime: "Heure de retour *",
+                durationLabel: "Durée totale:",
+                labelNotes: "Notes supplémentaires (Optionnel)",
+                submitBtn: "Vérifier la Disponibilité",
+                aboutTitle: "Votre partenaire automobile de confiance à Agadir",
+                contactSectionTitle: "Contactez-Nous",
+                footerContact: "Contact",
+                footerLegal: "Informations Légales",
+                navHome: "Accueil", navVehicles: "Nos Véhicules", navReviews: "Avis Clients", navAbout: "À Propos", navContact: "Contact"
+            },
+            ar: {
+                langBtn: "Français",
+                dir: "rtl",
+                heroBadge: "تأجير آمن وبدون مفاجآت",
+                heroTitle: "استأجر سيارتك المثالية في أكادير",
+                heroSub: "تسليم سريع في مطار المسيرة أو في الفندق. سيارات حديثة، ناقل حركة أوتوماتيكي وخدمة 5 نجوم.",
+                heroCta: "احجز الآن",
+                heroCtaSec: "تصفح السيارات",
+                feat1Title: "التسليم في المطار", feat1Desc: "استقبال مباشر عند الوصول",
+                feat2Title: "100% أوتوماتيك", feat2Desc: "راحة قيادة مضمونة",
+                feat3Title: "دعم 24/7", feat3Desc: "مساعدة عبر الواتساب",
+                feat4Title: "شفافية تامة", feat4Desc: "بدون مصاريف خفية",
+                carsTitle: "السيارات المتاحة لدينا",
+                carsSub: "اختر من بين أسطولنا الحديث من السيارات الأوتوماتيكية المجهزة بالكامل.",
+                fromText: "ابتداءً من",
+                dayText: "يوم",
+                bookBtn: "حجز السيارة",
+                reviewsTitle: "ماذا يقول عملاؤنا عنا",
+                formTitle: "طلب حجز",
+                formSub: "تحقق من توفر سيارتك في بضع خطوات بسيطة.",
+                labelCar: "السيارة المختارة *",
+                labelName: "الاسم الكامل *",
+                labelEmail: "البريد الإلكتروني *",
+                labelPhone: "رقم الهاتف *",
+                labelPickupDate: "تاريخ الاستلام *",
+                labelPickupTime: "وقت الاستلام *",
+                labelReturnDate: "تاريخ الإرجاع *",
+                labelReturnTime: "وقت الإرجاع *",
+                durationLabel: "المدة الإجمالية:",
+                labelNotes: "ملاحظات إضافية (اختياري)",
+                submitBtn: "التحقق من التوفر",
+                aboutTitle: "شريكك الموثوق لتأجير السيارات في أكادير",
+                contactSectionTitle: "تواصل معنا",
+                footerContact: "تواصل معنا",
+                footerLegal: "معلومات قانونية",
+                navHome: "الرئيسية", navVehicles: "السيارات", navReviews: "الآراء", navAbout: "من نحن", navContact: "تواصل معنا"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'ar' : 'fr';
+            const t = translations[currentLang];
+
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = t.dir;
+
+            document.getElementById('langBtnText').innerText = t.langBtn;
+            document.getElementById('heroBadge').innerText = t.heroBadge;
+            document.getElementById('heroTitle').innerText = t.heroTitle;
+            document.getElementById('heroSub').innerText = t.heroSub;
+            document.getElementById('heroCta').innerText = t.heroCta;
+            document.getElementById('heroCtaSec').innerText = t.heroCtaSec;
+            
+            document.getElementById('feat1Title').innerText = t.feat1Title; document.getElementById('feat1Desc').innerText = t.feat1Desc;
+            document.getElementById('feat2Title').innerText = t.feat2Title; document.getElementById('feat2Desc').innerText = t.feat2Desc;
+            document.getElementById('feat3Title').innerText = t.feat3Title; document.getElementById('feat3Desc').innerText = t.feat3Desc;
+            document.getElementById('feat4Title').innerText = t.feat4Title; document.getElementById('feat4Desc').innerText = t.feat4Desc;
+
+            document.getElementById('carsTitle').innerText = t.carsTitle;
+            document.getElementById('carsSub').innerText = t.carsSub;
+            document.getElementById('reviewsTitle').innerText = t.reviewsTitle;
+
+            document.querySelectorAll('.fromText').forEach(el => el.innerText = t.fromText);
+            document.querySelectorAll('.dayText').forEach(el => el.innerText = t.dayText);
+            document.querySelectorAll('.bookBtnText').forEach(el => el.innerText = t.bookBtn);
+
+            document.getElementById('formTitle').innerText = t.formTitle;
+            document.getElementById('formSub').innerText = t.formSub;
+            document.getElementById('labelCar').innerText = t.labelCar;
+            document.getElementById('labelName').innerText = t.labelName;
+            document.getElementById('labelEmail').innerText = t.labelEmail;
+            document.getElementById('labelPhone').innerText = t.labelPhone;
+            document.getElementById('labelPickupDate').innerText = t.labelPickupDate;
+            document.getElementById('labelPickupTime').innerText = t.labelPickupTime;
+            document.getElementById('labelReturnDate').innerText = t.labelReturnDate;
+            document.getElementById('labelReturnTime').innerText = t.labelReturnTime;
+            document.getElementById('durationLabel').innerText = t.durationLabel;
+            document.getElementById('labelNotes').innerText = t.labelNotes;
+            document.getElementById('submitBtnText').innerText = t.submitBtn;
+
+            document.getElementById('aboutTitle').innerText = t.aboutTitle;
+            document.getElementById('contactSectionTitle').innerText = t.contactSectionTitle;
+            document.getElementById('footerContact').innerText = t.footerContact;
+            document.getElementById('footerLegal').innerText = t.footerLegal;
+
+            document.getElementById('navHome').innerText = t.navHome;
+            document.getElementById('navVehicles').innerText = t.navVehicles;
+            document.getElementById('navReviews').innerText = t.navReviews;
+            document.getElementById('navAbout').innerText = t.navAbout;
+            document.getElementById('navContact').innerText = t.navContact;
+        }
+
+        function syncReturnTime() {
+            const pTime = document.getElementById('pickupTime').value;
+            document.getElementById('returnTime').value = pTime;
+            calculateRentalDays();
+        }
+
+        function calculateRentalDays() {
+            const pDateVal = document.getElementById('pickupDate').value;
+            const rDateVal = document.getElementById('returnDate').value;
+            const badge = document.getElementById('durationBadge');
+
+            if (pDateVal && rDateVal) {
+                const pDate = new Date(pDateVal);
+                const rDate = new Date(rDateVal);
+
+                const diffTime = rDate - pDate;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays > 0) {
+                    totalCalculatedDays = diffDays;
+                    document.getElementById('calculatedDays').innerText = diffDays;
+                    badge.classList.remove('hidden');
+                } else {
+                    totalCalculatedDays = 0;
+                    badge.classList.add('hidden');
+                }
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function selectCar(carName) {
+            document.getElementById('chosenCar').value = carName;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function submitBooking(event) {
+            event.preventDefault();
+            const alertBox = document.getElementById('responseAlert');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitBtnText = document.getElementById('submitBtnText');
+            
+            alertBox.classList.add('hidden');
+
+            const pDate = document.getElementById('pickupDate').value;
+            const timeVal = document.getElementById('pickupTime').value;
+            const rDate = document.getElementById('returnDate').value;
+
+            if (totalCalculatedDays <= 0) {
+                alertBox.classList.remove('hidden');
+                alertBox.classList.add('bg-red-100', 'text-red-800');
+                alertBox.innerText = currentLang === 'fr' 
+                    ? "La date de retour doit être ultérieure à la date de prise en charge." 
+                    : "تاريخ الإرجاع يجب أن يكون بعد تاريخ الاستلام.";
+                return;
+            }
+
+            const originalText = submitBtnText.innerText;
+
+            submitBtn.disabled = true;
+            submitBtnText.innerHTML = `<span class="spinner"></span> <span>${currentLang === 'fr' ? 'Vérification en cours...' : 'جاري التحقق...'}</span>`;
+
+            const payload = {
+                user_id: USER_ID,
+                chosen_car: document.getElementById('chosenCar').value,
+                full_name: document.getElementById('fullName').value,
+                email: document.getElementById('emailAddress').value,
+                phone_number: document.getElementById('phoneNumber').value,
+                pickup_date: pDate,
+                pickup_time: timeVal,
+                pickup_datetime: `${pDate}T${timeVal}:00`,
+                return_date: rDate,
+                return_time: timeVal,
+                return_datetime: `${rDate}T${timeVal}:00`,
+                rental_days: totalCalculatedDays,
+                timezone: "Africa/Casablanca",
+                additional_notes: document.getElementById('additionalNotes').value
+            };
+
+            try {
+                const response = await fetch(BOOKING_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const resData = await response.json();
+                alertBox.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700', 'bg-amber-100', 'text-amber-800');
+                
+                if (resData.available) {
+                    alertBox.classList.add('bg-green-100', 'text-green-800');
+                    alertBox.innerText = resData.message || "Merci! Votre demande a été reçue, et la voiture est disponible pour vos dates. Nous confirmerons sous peu.";
+                } else {
+                    alertBox.classList.add('bg-red-100', 'text-red-800');
+                    alertBox.innerText = resData.message || "Désolé, cette voiture n'est pas disponible pour ces dates. Veuillez essayer d'autres dates ou une autre voiture.";
+                }
+            } catch (err) {
+                alertBox.classList.remove('hidden');
+                alertBox.classList.add('bg-amber-100', 'text-amber-800');
+                alertBox.innerText = "Demande envoyée avec succès. Nous vous contacterons sous peu pour confirmer.";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtnText.innerText = originalText;
+            }
+        }
+
+        function toggleChat() {
+            const chatWin = document.getElementById('chatWindow');
+            chatWin.classList.toggle('hidden');
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML += `<div class="bg-red-600 text-white p-2.5 rounded-xl max-w-[80%] ml-auto text-right">${msg}</div>`;
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                const response = await fetch(CHATBOT_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        user_id: USER_ID,
+                        message: msg, 
+                        lang: currentLang,
+                        timezone: "Africa/Casablanca" 
+                    })
+                });
+                const data = await response.json();
+                const reply = data.reply || "Merci pour votre message. Nous vous répondrons sous peu.";
+                chatMessages.innerHTML += `<div class="bg-slate-200 text-slate-800 p-2.5 rounded-xl max-w-[80%]">${reply}</div>`;
+            } catch (err) {
+                chatMessages.innerHTML += `<div class="bg-slate-200 text-slate-800 p-2.5 rounded-xl max-w-[80%]">Service indisponible pour le moment. Veuillez nous contacter via WhatsApp.</div>`;
+            }
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Legal Modal Logic
+        function openLegalModal(type) {
+            const modal = document.getElementById('legalModal');
+            const title = document.getElementById('legalModalTitle');
+            const content = document.getElementById('legalModalContent');
+
+            if (type === 'mentions') {
+                title.innerText = "Mentions Légales";
+                content.innerHTML = `
+                    <p><strong>Raison Sociale:</strong> Safe Rent Agadir</p>
+                    <p><strong>Adresse:</strong> Douar Ikhourban Temsia, Agadir, Maroc</p>
+                    <p><strong>Téléphone:</strong> +212 648926155</p>
+                    <p><strong>E-mail:</strong> saferentaga@gmail.com</p>
+                    <p>Ce site web fournit des services de réservation en ligne pour la location de véhicules à Agadir. Toutes les réservations sont soumises à confirmation par l'agence.</p>
+                `;
+            } else if (type === 'cgv') {
+                title.innerText = "Conditions Générales de Vente (CGV)";
+                content.innerHTML = `
+                    <p><strong>1. Conditions du Conducteur:</strong> Le conducteur doit avoir au moins 21 ans et être titulaire d'un permis de conduire valide depuis plus de 2 ans.</p>
+                    <p><strong>2. Paiement & Caution:</strong> Le règlement s'effectue lors de la livraison du véhicule. Une caution réglée par carte ou en espèces est requise lors de la prise en charge.</p>
+                    <p><strong>3. Utilisation du Véhicule:</strong> Le véhicule est strictement réservé aux routes goudronnées. Les pannes liées aux pistes ou à la négligence sont sous la responsabilité du locataire.</p>
+                `;
+            } else if (type === 'privacy') {
+                title.innerText = "Politique de Confidentialité";
+                content.innerHTML = `
+                    <p>Safe Rent Agadir s'engage à protéger la vie privée de ses utilisateurs.</p>
+                    <p>Les informations collectées dans les formulaires de réservation (nom, e-mail, téléphone) sont utilisées exclusivement pour le traitement de votre demande de location et la confirmation de votre véhicule.</p>
+                    <p>Vos données personnelles ne seront jamais vendues ni cédées à des tiers.</p>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeLegalModal() {
+            document.getElementById('legalModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
