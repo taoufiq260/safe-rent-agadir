@@ -377,15 +377,28 @@
                         </div>
                     </div>
 
+                    <!-- Pickup & Return Locations -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label id="labelPickupLocation" class="block text-xs font-bold text-slate-700 uppercase mb-1">Lieu de départ *</label>
+                            <input type="text" id="pickupLocation" required placeholder="Ex: Aéroport Agadir Al Massira" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+
+                        <div>
+                            <label id="labelReturnLocation" class="block text-xs font-bold text-slate-700 uppercase mb-1">Lieu de retour *</label>
+                            <input type="text" id="returnLocation" required placeholder="Ex: Hôtel à Agadir" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        </div>
+                    </div>
+
                     <!-- Pickup Date & Time -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label id="labelPickupDate" class="block text-xs font-bold text-slate-700 uppercase mb-1">Date de prise en charge *</label>
+                            <label id="labelPickupDate" class="block text-xs font-bold text-slate-700 uppercase mb-1">Date de départ *</label>
                             <input type="date" id="pickupDate" required onchange="calculateRentalDays()" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                         </div>
 
                         <div>
-                            <label id="labelPickupTime" class="block text-xs font-bold text-slate-700 uppercase mb-1">Heure de prise en charge *</label>
+                            <label id="labelPickupTime" class="block text-xs font-bold text-slate-700 uppercase mb-1">Heure de départ *</label>
                             <select id="pickupTime" required onchange="syncReturnTime()" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 bg-white">
                                 <option value="">-- Choisir l'heure --</option>
                                 <option value="08:00">08:00</option>
@@ -639,6 +652,8 @@
                 labelName: "Nom complet *",
                 labelEmail: "Adresse e-mail *",
                 labelPhone: "Numéro de téléphone *",
+                labelPickupLocation: "Lieu de prise en charge *",
+                labelReturnLocation: "Lieu de retour *",
                 labelPickupDate: "Date de prise en charge *",
                 labelPickupTime: "Heure de prise en charge *",
                 labelReturnDate: "Date de retour *",
@@ -676,6 +691,8 @@
                 labelName: "الاسم الكامل *",
                 labelEmail: "البريد الإلكتروني *",
                 labelPhone: "رقم الهاتف *",
+                labelPickupLocation: "مكان الاستلام *",
+                labelReturnLocation: "مكان الإرجاع *",
                 labelPickupDate: "تاريخ الاستلام *",
                 labelPickupTime: "وقت الاستلام *",
                 labelReturnDate: "تاريخ الإرجاع *",
@@ -724,6 +741,8 @@
             document.getElementById('labelName').innerText = t.labelName;
             document.getElementById('labelEmail').innerText = t.labelEmail;
             document.getElementById('labelPhone').innerText = t.labelPhone;
+            document.getElementById('labelPickupLocation').innerText = t.labelPickupLocation;
+            document.getElementById('labelReturnLocation').innerText = t.labelReturnLocation;
             document.getElementById('labelPickupDate').innerText = t.labelPickupDate;
             document.getElementById('labelPickupTime').innerText = t.labelPickupTime;
             document.getElementById('labelReturnDate').innerText = t.labelReturnDate;
@@ -812,6 +831,8 @@
                 full_name: document.getElementById('fullName').value,
                 email: document.getElementById('emailAddress').value,
                 phone_number: document.getElementById('phoneNumber').value,
+                pickup_location: document.getElementById('pickupLocation').value,
+                return_location: document.getElementById('returnLocation').value,
                 pickup_date: pDate,
                 pickup_time: timeVal,
                 pickup_datetime: `${pDate}T${timeVal}:00`,
@@ -826,11 +847,26 @@
             try {
                 const response = await fetch(BOOKING_WEBHOOK_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     body: JSON.stringify(payload)
                 });
 
-                const resData = await response.json();
+                // Read the response safely so a non-JSON n8n response does not
+                // make a successful submission look like a failed one.
+                const responseText = await response.text();
+                let resData = {};
+                try {
+                    resData = responseText ? JSON.parse(responseText) : {};
+                } catch (parseErr) {
+                    resData = {};
+                }
+
+                if (!response.ok) {
+                    throw new Error(`Booking webhook returned HTTP ${response.status}`);
+                }
                 alertBox.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700', 'bg-amber-100', 'text-amber-800');
                 
                 if (resData.available) {
@@ -843,7 +879,7 @@
             } catch (err) {
                 alertBox.classList.remove('hidden');
                 alertBox.classList.add('bg-amber-100', 'text-amber-800');
-                alertBox.innerText = "Demande envoyée avec succès. Nous vous contacterons sous peu pour confirmer.";
+                alertBox.innerText = "⚠️ Problème technique. Réessayez plus tard ou contactez-nous sur WhatsApp : +212 648926155.";
             } finally {
                 submitBtn.disabled = false;
                 submitBtnText.innerText = originalText;
